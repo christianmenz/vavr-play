@@ -1,5 +1,6 @@
 package ch.christianmenz.vavr;
 
+import io.vavr.CheckedFunction1;
 import io.vavr.control.Try;
 
 import java.util.List;
@@ -13,6 +14,9 @@ public class TryExample {
         System.out.println(test.isFailure());
         System.out.println(test.getOrElse(0));
         List.of("hello", "1", "2", "world").stream().map(i -> Try.of(() -> TryExample.convert(i))).collect(Collectors.toList());
+        List.of("helllo", "1", "2").stream().map(CheckedFunction1.lift(i -> convert((i)))).forEach(o -> {
+            System.out.println(o.getOrElse(-1));
+        });
 
     }
 
