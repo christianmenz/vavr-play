@@ -4,7 +4,6 @@ import io.vavr.CheckedFunction1;
 import io.vavr.control.Try;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TryExample {
 
