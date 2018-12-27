@@ -25,6 +25,12 @@ public class TryExample {
             System.out.println(o.getOrElse(-1));
         });
 
+        // Using lift try
+        System.out.println("--- using lift try function ---");
+        List.of("helllo", "1", "2").stream().map(CheckedFunction1.liftTry(i -> convert((i)))).forEach(o -> {
+            System.out.println(o.getOrElse(-1));
+        });
+
     }
 
     public static Integer convert(String s) {
