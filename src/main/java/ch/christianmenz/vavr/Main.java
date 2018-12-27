@@ -24,7 +24,7 @@ public class Main {
         System.out.println("---- ");
 
         Callable<Object> callable = () -> {
-            List<Integer> collect1 = forkJoinPool.submit(() -> List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15).stream().parallel().map(i -> {
+            forkJoinPool.submit(() -> List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15).stream().parallel().map(i -> {
                 System.out.println(Thread.currentThread().getName());
                 return i;
             })).get().collect(Collectors.toList());
