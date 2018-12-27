@@ -2,10 +2,7 @@ package ch.christianmenz.vavr;
 
 
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.ForkJoinTask;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -26,14 +23,12 @@ public class Main {
 
         System.out.println("---- ");
 
-        Callable<Object> callable = new Callable<Object>() {
-            public Object call() throws Exception {
-                java.util.List<Integer> collect = forkJoinPool.submit(() -> List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15).stream().parallel().map(i -> {
-                    System.out.println(Thread.currentThread().getName());
-                    return i;
-                })).get().collect(Collectors.toList());
-                return null;
-            }
+        Callable<Object> callable = () -> {
+            List<Integer> collect1 = forkJoinPool.submit(() -> List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15).stream().parallel().map(i -> {
+                System.out.println(Thread.currentThread().getName());
+                return i;
+            })).get().collect(Collectors.toList());
+            return null;
         };
         ForkJoinTask<Object> submit = forkJoinPool.submit(callable);// use the pool to submit...
 
